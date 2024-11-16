@@ -1,0 +1,12 @@
+# Terraform files
+.terraform/            # Directory for Terraform plugins and modules
+*.tfstate              # Terraform state files
+*.tfstate.*            # Backup and other state-related files
+.terraform.lock.hcl    # Terraform lock file (can be committed if desired)
+*.tfvars               # Variable files (can contain sensitive data)
+override.tf            # Override configuration files
+override.tf.json       # Override configuration files in JSON format
+*_override.tf          # Override configuration files
+*_override.tf.json     # Override configuration files in JSON format
+crash.log              # Terraform crash logs
+

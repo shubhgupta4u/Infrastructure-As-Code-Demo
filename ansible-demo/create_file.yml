@@ -1,0 +1,12 @@
+---
+- name: Create a file on Google Cloud VM
+  hosts: google_cloud_vm
+  become: true  # If you need to run the command as root or with sudo
+  tasks:
+    - name: Create a new file
+      ansible.builtin.file:
+        path: /home/shubh/example.txt
+        state: touch  # This will create the file if it doesn't exist
+        mode: '0644'
+        owner: shubh  # Set the owner of the file
+        group: shubh  # Set the group of the file

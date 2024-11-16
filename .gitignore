@@ -1,0 +1,25 @@
+# Ignore the key.json file
+**/key.json
+
+# Ignore all folders starting with a dot (.)
+.*/
+terraform-demo/.*/
+ansible-demo/.*/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+
+# General editor files
+*.log                  # Log files
+*.log.*                # Log files with extensions
+*.tmp                  # Temporary files
+.vscode/               # VS Code editor settings
+.idea/                 # IntelliJ/JetBrains settings
+*.swp                  # Swap files created by vim
+*.swo                  # Swap files created by vim
+.DS_Store              # macOS file system metadata
+Thumbs.db              # Windows file system metadata
+
+# OS generated files
+Desktop.ini            # Windows metadata files
+ehthumbs.db            # Windows file system metadata
+
