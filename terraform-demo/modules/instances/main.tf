@@ -6,9 +6,9 @@ data "google_compute_image" "ubuntu" {
 
 # Create the virtual machine instance
 resource "google_compute_instance" "linux_vm" {
-  name         = "demo-vm1"
+  name         = var.instance_name
   machine_type = "f1-micro"  # You can change the instance type as needed
-  zone         = "us-central1-a"  # Specify your desired zone
+  zone         = var.gcp_zone  # Specify your desired zone
 
   boot_disk {
     initialize_params {
@@ -24,7 +24,7 @@ resource "google_compute_instance" "linux_vm" {
   }
 
   metadata = {
-    ssh-keys = "shubh:${file("/home/shubh/.ssh/id_rsa.pub")}"  # Use your SSH public key for access
+    ssh-keys = "${var.ssh_user}:${file("/home/${var.ssh_user}/.ssh/id_rsa.pub")}"  # Use your SSH public key for access
   }
 
   tags = ["ssh"]

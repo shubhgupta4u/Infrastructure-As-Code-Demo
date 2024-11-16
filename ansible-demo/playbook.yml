@@ -1,0 +1,46 @@
+---
+- name: Run Terraform from Ansible
+  hosts: localhost
+  gather_facts: no
+  vars:
+    terraform_directory: "/home/shubh/projects/terraform-demo"
+    instance_name: "demo-vm3"
+    ssh_user: "shubh"
+  tasks:
+    - name: Change to the Terraform directory
+      ansible.builtin.shell: "cd {{ terraform_directory }}"
+
+    - name: Write Terraform variable file
+      ansible.builtin.copy:
+        dest: "{{ terraform_directory }}/terraform.tfvars"
+        content: |
+          instance_name = "{{ instance_name }}"
+          ssh_user = "{{ ssh_user }}"          
+
+    - name: Initialize Terraform
+      ansible.builtin.command:
+        cmd: sudo terraform init
+        chdir: "{{ terraform_directory }}"
+      register: terraform_init
+
+    - name: Run Terraform Plan
+      ansible.builtin.command:
+        cmd: sudo terraform plan
+        chdir: "{{ terraform_directory }}"
+      register: terraform_plan
+      ignore_errors: yes
+
+    - name: Show Terraform Plan Output
+      ansible.builtin.debug:
+        var: terraform_plan.stdout
+
+    - name: Apply Terraform Apply
+      ansible.builtin.command:
+        cmd: sudo terraform apply -auto-approve
+        chdir: "{{ terraform_directory }}"
+      when: terraform_plan.rc == 0
+      register: terraform_apply
+
+    - name: Show Terraform Apply Output
+      ansible.builtin.debug:
+        var: terraform_apply.stdout

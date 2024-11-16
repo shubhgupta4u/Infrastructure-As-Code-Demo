@@ -2,6 +2,8 @@
 - name: Create a file on Google Cloud VM
   hosts: google_cloud_vm
   become: true  # If you need to run the command as root or with sudo
+  vars:
+    ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
   tasks:
     - name: Create a new file
       ansible.builtin.file:

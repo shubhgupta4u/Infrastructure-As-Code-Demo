@@ -1,0 +1,18 @@
+---
+- name: Modify hosts.ini to ssh the remote google VM
+  hosts: localhost
+  vars:
+    instance_ip: "{{ instance_public_ip }}"
+    ssh_user: "{{ ssh_user }}"
+    inventory_file: "{{ inventory_file }}"
+  tasks:
+    - name: Print the instance public IP
+      debug:
+        msg: "The public IP of the GCP Compute Engine instance is {{ instance_ip }}"
+
+    - name: Write hosts.ini inventory file
+      ansible.builtin.copy:
+        dest: "{{ inventory_file }}"
+        content: |
+          [google_cloud_vm]
+          {{ instance_ip }} ansible_ssh_private_key_file=/home/{{ ssh_user }}/.ssh/id_rsa ansible_user={{ ssh_user }}
