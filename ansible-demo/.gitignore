@@ -1,0 +1,6 @@
+# Ansible files
+*.retry                # Retry files (generated when an Ansible playbook fails)
+*.yml~                 # Backup files
+*.swp                  # Swap files created by vim/emacs
+*.bak                  # Backup files
+*.ansible.cfg          # Ansible configuration file (if it contains sensitive info)
